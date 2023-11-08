@@ -1,36 +1,35 @@
-export function validatePassword(password: string): {errors: string[], success: string[]} {
-  const errors = [];
-  const success = [];
+export function validatePassword(password: string): {message: string, isError: boolean}[] {
+  const messages = [];
 
   if (password.length < 8) {
-    errors.push('A senha deve ter pelo menos 8 caracteres');
+    messages.push({message: 'A senha deve ter pelo menos 8 caracteres', isError: true});
   } else {
-    success.push('A senha tem pelo menos 8 caracteres');
+    messages.push({message: 'A senha tem pelo menos 8 caracteres', isError: false});
   }
 
   if (!/\d/.test(password)) {
-    errors.push('A senha deve conter pelo menos 1 número');
+    messages.push({message: 'A senha deve conter pelo menos 1 número', isError: true});
   } else {
-    success.push('A senha contém pelo menos 1 número');
+    messages.push({message: 'A senha contém pelo menos 1 número', isError: false});
   }
 
   if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    errors.push('A senha deve conter pelo menos 1 caractere especial');
+    messages.push({message: 'A senha deve conter pelo menos 1 caractere especial', isError: true});
   } else {
-    success.push('A senha contém pelo menos 1 caractere especial');
+    messages.push({message: 'A senha contém pelo menos 1 caractere especial', isError: false});
   }
 
   if (!/[A-Z]/.test(password)) {
-    errors.push('A senha deve conter pelo menos 1 letra maiúscula');
+    messages.push({message: 'A senha deve conter pelo menos 1 letra maiúscula', isError: true});
   } else {
-    success.push('A senha contém pelo menos 1 letra maiúscula');
+    messages.push({message: 'A senha contém pelo menos 1 letra maiúscula', isError: false});
   }
 
   if (!/[a-z]/.test(password)) {
-    errors.push('A senha deve conter pelo menos 1 letra minúscula');
+    messages.push({message: 'A senha deve conter pelo menos 1 letra minúscula', isError: true});
   } else {
-    success.push('A senha contém pelo menos 1 letra minúscula');
+    messages.push({message: 'A senha contém pelo menos 1 letra minúscula', isError: false});
   }
 
-  return {errors, success};
+  return messages;
 }

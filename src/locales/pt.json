@@ -5,7 +5,7 @@
     "ln.portuguese": "Português",
     "ln.english": "Inglês",
     "length.error": "A senha deve ter pelo menos 8 caracteres",
-    "length.success": "A senha deve ter pelo menos 8 caracteres",
+    "length.success": "A senha tem pelo menos 8 caracteres",
     "number.error": "A senha deve conter pelo menos 1 número",
     "number.success": "A senha contém pelo menos 1 número",
     "specialCharacter.error": "A senha deve conter pelo menos 1 caractere especial",

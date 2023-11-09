@@ -58,7 +58,7 @@ const resultadosValidacao = validatePassword(senha);
 
 ### Mensagens de Validação:
 
-- `length.success`: O comprimento da senha é pelo menos 8 caracteres.
+- `length.success`: A senha tem pelo menos 8 caracteres.
 - `length.error`: A senha deve ter pelo menos 8 caracteres.
 
 - `number.success`: A senha contém pelo menos um dígito numérico.

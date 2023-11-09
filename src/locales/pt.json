@@ -1,0 +1,17 @@
+{
+    "select.language": "Selecionar idioma",
+    "password": "Senha",
+    "login": "Entrar",
+    "ln.portuguese": "Português",
+    "ln.english": "Inglês",
+    "length.error": "A senha deve ter pelo menos 8 caracteres",
+    "length.success": "A senha deve ter pelo menos 8 caracteres",
+    "number.error": "A senha deve conter pelo menos 1 número",
+    "number.success": "A senha contém pelo menos 1 número",
+    "specialCharacter.error": "A senha deve conter pelo menos 1 caractere especial",
+    "specialCharacter.success": "A senha contém pelo menos 1 caractere especial",
+    "uppercase.error": "A senha deve conter pelo menos 1 letra maiúscula",
+    "uppercase.success": "A senha contém pelo menos 1 letra maiúscula",
+    "lowercase.error": "A senha deve conter pelo menos 1 letra minúscula",
+    "lowercase.success": "A senha contém pelo menos 1 letra minúscula"
+}

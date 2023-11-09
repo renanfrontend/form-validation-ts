@@ -2,33 +2,33 @@ export function validatePassword(password: string): {message: string, isError: b
   const messages = [];
 
   if (password.length < 8) {
-    messages.push({message: 'A senha deve ter pelo menos 8 caracteres', isError: true});
+    messages.push({message: 'length.error', isError: true});
   } else {
-    messages.push({message: 'A senha tem pelo menos 8 caracteres', isError: false});
+    messages.push({message: 'length.success', isError: false});
   }
 
   if (!/\d/.test(password)) {
-    messages.push({message: 'A senha deve conter pelo menos 1 número', isError: true});
+    messages.push({message: 'number.error', isError: true});
   } else {
-    messages.push({message: 'A senha contém pelo menos 1 número', isError: false});
+    messages.push({message: 'number.success', isError: false});
   }
 
   if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    messages.push({message: 'A senha deve conter pelo menos 1 caractere especial', isError: true});
+    messages.push({message: 'specialCharacter.error', isError: true});
   } else {
-    messages.push({message: 'A senha contém pelo menos 1 caractere especial', isError: false});
+    messages.push({message: 'specialCharacter.success', isError: false});
   }
 
   if (!/[A-Z]/.test(password)) {
-    messages.push({message: 'A senha deve conter pelo menos 1 letra maiúscula', isError: true});
+    messages.push({message: 'uppercase.error', isError: true});
   } else {
-    messages.push({message: 'A senha contém pelo menos 1 letra maiúscula', isError: false});
+    messages.push({message: 'uppercase.success', isError: false});
   }
 
   if (!/[a-z]/.test(password)) {
-    messages.push({message: 'A senha deve conter pelo menos 1 letra minúscula', isError: true});
+    messages.push({message: 'lowercase.error', isError: true});
   } else {
-    messages.push({message: 'A senha contém pelo menos 1 letra minúscula', isError: false});
+    messages.push({message: 'lowercase.success', isError: false});
   }
 
   return messages;

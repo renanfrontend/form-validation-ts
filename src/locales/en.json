@@ -1,0 +1,17 @@
+{
+    "select.language": "Select language",
+    "password": "Password",
+    "login": "Login",
+    "ln.portuguese": "Portuguese",
+    "ln.english": "English",
+    "length.error": "Password must have at least 8 characters",
+    "length.success": "Password has at least 8 characters",
+    "number.error": "Password must contain at least 1 number",
+    "number.success": "Password contains at least 1 number",
+    "specialCharacter.error": "Password must contain at least 1 special character",
+    "specialCharacter.success": "Password contains at least 1 special character",
+    "uppercase.error": "Password must contain at least 1 uppercase letter",
+    "uppercase.success": "Password contains at least 1 uppercase letter",
+    "lowercase.error": "Password must contain at least 1 lowercase letter",
+    "lowercase.success": "Password contains at least 1 lowercase letter"
+}

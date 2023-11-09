@@ -1,46 +1,172 @@
-# Getting Started with Create React App
+## Instalação e Execução do Projeto
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Instalação
 
-## Available Scripts
+Certifique-se de ter o [Node.js](https://nodejs.org/) e o [npm](https://www.npmjs.com/) instalados no seu sistema.
 
-In the project directory, you can run:
+1. Clone o repositório:
 
-### `npm start`
+```bash
+git clone https://github.com/renanfrontend/form-validation-ts.git
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. Acesse o diretório do projeto:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+cd form-validation-ts
+```
 
-### `npm test`
+3. Instale as dependências:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+### Execução
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Inicie o aplicativo:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+O aplicativo será iniciado e estará disponível no seu navegador em `http://localhost:3000/`.
 
-### `npm run eject`
+## Componente de Validação de Senha
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Função `validatePassword`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+A função `validatePassword` foi desenvolvida para avaliar a robustez de uma senha fornecida. Ela retorna um array de mensagens de validação, cada uma contendo uma string de mensagem e um booleano indicando se é uma mensagem de erro ou sucesso.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Exemplo de Uso:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```typescript
+import { validatePassword } from './validation';
 
-## Learn More
+const senha = 'exemploSenha123';
+const resultadosValidacao = validatePassword(senha);
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+// Exemplo de saída:
+// [
+//   { message: 'length.success', isError: false },
+//   { message: 'number.success', isError: false },
+//   { message: 'specialCharacter.success', isError: false },
+//   { message: 'uppercase.success', isError: false },
+//   { message: 'lowercase.success', isError: false },
+// ]
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Mensagens de Validação:
+
+- `length.success`: O comprimento da senha é pelo menos 8 caracteres.
+- `length.error`: A senha deve ter pelo menos 8 caracteres.
+
+- `number.success`: A senha contém pelo menos um dígito numérico.
+- `number.error`: A senha deve conter pelo menos um dígito numérico.
+
+- `specialCharacter.success`: A senha contém pelo menos um caractere especial.
+- `specialCharacter.error`: A senha deve conter pelo menos um caractere especial.
+
+- `uppercase.success`: A senha contém pelo menos uma letra maiúscula.
+- `uppercase.error`: A senha deve conter pelo menos uma letra maiúscula.
+
+- `lowercase.success`: A senha contém pelo menos uma letra minúscula.
+- `lowercase.error`: A senha deve conter pelo menos uma letra minúscula.
+
+## Integração com um Formulário de Login
+
+### Exemplo de Uso:
+
+```typescript
+import React, { useState, useEffect } from 'react';
+import { validatePassword } from './validation';
+import { useTranslation } from 'react-i18next';
+
+const FormularioLogin: React.FC = () => {
+  const [senha, setSenha] = useState('');
+  const [mensagens, setMensagens] = useState<{ message: string; isError: boolean }[]>([]);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    const resultadosValidacao = validatePassword(senha);
+    setMensagens(resultadosValidacao);
+  }, [senha]);
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!mensagens.some((mensagem) => mensagem.isError)) {
+      // Prossiga com o login se a validação for bem-sucedida...
+    }
+  };
+
+  const mudarIdioma = (idioma: string) => {
+    i18n.changeLanguage(idioma);
+  };
+
+  return (
+    <>
+      {/* Seletor de Idioma */}
+      <div>
+        <label style={{ margin: '8px' }} htmlFor="idioma">
+          {t('selecionar.idioma')}
+        </label>
+        <select
+          id="idioma"
+          onChange={(e) => mudarIdioma(e.target.value)}
+          defaultValue={i18n.language}
+        >
+          <option style={{ margin: '8px' }} value="pt">
+            {t('ln.portugues')}
+          </option>
+          <option style={{ margin: '8px' }} value="en">
+            {t('ln.ingles')}
+          </option>
+        </select>
+      </div>
+
+      {/* Formulário de Login */}
+      <form onSubmit={handleSubmit}>
+        <label>
+          {t('senha')}
+          <input
+            style={{ margin: '6px' }}
+            type="password"
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+        </label>
+        <button type="submit">{t('entrar')}</button>
+
+        {/* Exibição de Mensagens de Validação */}
+        {mensagens.map((mensagemObj, index) => (
+          <p key={index}>
+            <span style={{ width: '20px', display: 'inline-block' }} role="img" aria-label={mensagemObj.isError ? 'erro' : 'check'}>
+              {mensagemObj.isError ? '❌' : '✅'}
+            </span>
+            {t(mensagemObj.message)}
+          </p>
+        ))}
+      </form>
+    </>
+  );
+};
+
+export default FormularioLogin;
+```
+
+### Internacionalização (i18n)
+
+O exemplo utiliza a biblioteca `react-i18next` para internacionalização. Essa biblioteca permite traduzir seu aplicativo para vários idiomas.
+
+#### Seleção de Idioma:
+
+- O idioma pode ser selecionado usando o menu suspenso fornecido.
+
+#### Tradução de Mensagens:
+
+- A função `t` de `useTranslation` é usada para traduzir mensagens com base no idioma selecionado.
+
+#### Mudança de Idioma:
+
+- A função `mudarIdioma` é usada para alterar dinamicamente o idioma.

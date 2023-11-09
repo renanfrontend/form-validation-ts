@@ -40,7 +40,7 @@ const LoginForm: React.FC = () => {
       <form onSubmit={handleSubmit}>
         <label>
         {t('password')}
-          <input style={{margin: '6px'}} type="text" value={password} onChange={e => setPassword(e.target.value)} />
+          <input style={{margin: '6px'}} type="password" value={password} onChange={e => setPassword(e.target.value)} />
         </label>
         <button type="submit">{t('login')}</button>
         {messages.map((messageObj, index) => (
